@@ -3,19 +3,28 @@ pipeline {
     agent any
 
     stages {
-        stage('Restore') {
+        stage('Dotnet restore') {
+            when {
+                branch 'main'
+            }
             steps {
                 bat 'dotnet restore'
             }
         }
 
-        stage('Build') {
+        stage('Dotnet build') {
+            when {
+                branch 'main'
+            }
             steps {
                 bat 'dotnet build --no-restore'
             }
         }
 
-        stage('Test') {
+        stage('Dotnet test') {
+            when {
+                branch 'main'
+            }
             steps {
                 bat 'dotnet test --no-build --verbosity normal'
             }
